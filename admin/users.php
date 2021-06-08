@@ -61,7 +61,7 @@
                               ?>
                                </td>                          
                                <td class='edit'><a href='update-user.php?id=<?php echo $user_id?>'><i class='fa fa-edit'></i></a></td>
-                              <td class='delete'><a href='delete-user.php?deleted=<?php echo $user_id?>'><i class='fa fa-trash-o'></i></a></td>
+                              <td class='delete'><a onclick="return confirm('Are You Sure?')" href='delete-user.php?id=<?php echo $user_id?>'><i class='fa fa-trash-o'></i></a></td>
                           </tr>
             <?php } ?>          
                           
