@@ -9,7 +9,19 @@
                   <a class="add-new" href="add-user.php">add user</a>
               </div>
               <div class="col-md-12">
-                  <table class="content-table">
+
+
+        <?php 
+          include "config.php";
+          $query="SELECT * FROM user ORDER BY user_id DESC ";
+          $result=mysqli_query($connection,$query) or die("Query Failed.");
+          $count=mysqli_num_rows($result);
+          
+          if($count>0){
+
+        ?>
+
+               <table class="content-table">
                       <thead>
                           <th>S.No.</th>
                           <th>Full Name</th>
@@ -19,39 +31,45 @@
                           <th>Delete</th>
                       </thead>
                       <tbody>
+
+        <?php  
+            while($row=mysqli_fetch_assoc($result)){
+
+                $user_id=$row['user_id'];
+                $first_name_id=$row['first_name'];
+                $last_name_id=$row['last_name'];
+                $username_id=$row['username'];
+                $password_id=$row['password'];
+                $role_id=$row['role'];
+
+            
+        
+        
+        ?>
                           <tr>
-                              <td class='id'>1</td>
-                              <td>Ram Sharma</td>
-                              <td>ram</td>
-                              <td>admin</td>
-                              <td class='edit'><a href='update-user.php'><i class='fa fa-edit'></i></a></td>
+                              <td class='id'><?php echo $user_id?></td>
+                              <td><?php echo $first_name_id." ".$last_name_id?></td>
+                              <td><?php echo $username_id?></td>
+                              <td><?php 
+                                if($role_id==1){
+                                    echo "Admin";
+                                }else{
+                                    echo "Modarator";
+                                }
+                              
+                              
+                              ?>
+                               </td>                          
+                               <td class='edit'><a href='update-user.php'><i class='fa fa-edit'></i></a></td>
                               <td class='delete'><a href='delete-user.php'><i class='fa fa-trash-o'></i></a></td>
                           </tr>
-                          <tr>
-                              <td class='id'>2</td>
-                              <td>Shyam Kumar</td>
-                              <td>shyam</td>
-                              <td>normal</td>
-                              <td class='edit'><a href='update-user.php'><i class='fa fa-edit'></i></a></td>
-                              <td class='delete'><a href='delete-user.php'><i class='fa fa-trash-o'></i></a></td>
-                          </tr>
-                          <tr>
-                              <td class='id'>3</td>
-                              <td>Ramesh Kumar</td>
-                              <td>ramesh</td>
-                              <td>admin</td>
-                              <td class='edit'><a href='update-user.php'><i class='fa fa-edit'></i></a></td>
-                              <td class='delete'><a href='delete-user.php'><i class='fa fa-trash-o'></i></a></td>
-                          </tr>
-                          <tr>
-                              <td class='id'>4</td>
-                              <td>Satish Sharma</td>
-                              <td>satish</td>
-                              <td>admin</td>
-                              <td class='edit'><a href='update-user.php'><i class='fa fa-edit'></i></a></td>
-                              <td class='delete'><a href='delete-user.php'><i class='fa fa-trash-o'></i></a></td>
-                          </tr>
+            <?php } ?>          
+                          
                       </tbody>
+
+                      <?php 
+                            }
+                      ?>
                   </table>
                   <ul class='pagination admin-pagination'>
                       <li class="active"><a>1</a></li>
@@ -62,4 +80,4 @@
           </div>
       </div>
   </div>
-<?php include "header.php"; ?>
+<?php include "footer.php"; ?>

@@ -8,7 +8,7 @@
               <div class="col-md-offset-3 col-md-6">
                   
                   <?php
-                    if(isset($_POST['submit'])){
+                    if(isset($_POST['save'])){
                         include 'config.php';
                         $fname=mysqli_real_escape_string($connection,$_POST['fname']);
                         $lname=mysqli_real_escape_string($connection,$_POST['lname']);
