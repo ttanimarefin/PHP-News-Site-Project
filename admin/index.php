@@ -30,6 +30,44 @@
                             <input type="submit" name="login" class="btn btn-primary" value="login" />
                         </form>
                         <!-- /Form  End -->
+
+    <?php
+    
+            if(isset($_POST['login'])){
+
+                include "confiq.php";
+                $username=mysqli_real_escape_string($connection,$_POST['username']);
+                $passowrd=md5($_POST['password']);
+
+                $query= "SELECT user_id,username,role FROM user WHERE username='{$username}' AND password='{$passowrd}'";
+                $result=mysqli_query($connection,$query) or die ("Not Connected. ");
+
+                if(mysqli_num_rows($result)>0){
+                    
+
+                    while($row=mysqli_fetch_assoc($result)){
+
+                        session_start();
+                        $_SESSION['username']=$row['username'];
+                        $_SESSION['user_id']=$row['user_id'];
+                        $_SESSION['user_role']=$row['user_role'];
+
+                        header("location: post.php");
+
+
+                    }
+                }else{
+                    echo "<b>Username and Passwprd are not match</b>";
+                }
+
+            }
+    
+    
+    
+    
+    ?>
+
+
                     </div>
                 </div>
             </div>
