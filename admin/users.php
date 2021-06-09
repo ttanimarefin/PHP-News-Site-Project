@@ -13,8 +13,22 @@
 
         <?php 
           include "config.php";
-          $query="SELECT * FROM user ORDER BY user_id DESC ";
+
+
+          #pagination
+          $limit=3;
+          if(isset($_GET['page'])){
+            $page_number=$_GET['page'];
+          }else{
+            $page_number=1;
+          }
+          
+          $offset=($page_number-1) * $limit;
+
+
+          $query="SELECT * FROM user ORDER BY user_id DESC LIMIT {$offset}, {$limit}"; #data show and pagination
           $result=mysqli_query($connection,$query) or die("Query Failed.");
+          
           $count=mysqli_num_rows($result);
           
           if($count>0){
@@ -71,11 +85,49 @@
                             }
                       ?>
                   </table>
-                  <ul class='pagination admin-pagination'>
-                      <li class="active"><a>1</a></li>
-                      <li><a>2</a></li>
-                      <li><a>3</a></li>
-                  </ul>
+
+<?php
+#-----------------------------------pagination---------
+  include "config.php";
+  $query2="SELECT * FROM user"; 
+  $result2=mysqli_query($connection,$query2)  or die("Failed");
+  if(mysqli_num_rows($result2)) {
+      $total_records=mysqli_num_rows($result2);
+      $total_page=ceil($total_records/$limit);
+
+      echo "<ul class='pagination admin-pagination'>";
+
+      if($page_number>1){
+        echo '<li><a href="users.php?page='.($page_number-1).'">prev</a></li>';
+      }
+      
+      for($i=1; $i<=$total_page; $i++){
+
+        if($i==$page_number){
+            $active="active";
+        }else{
+            $active="";
+        }
+
+        echo '<li class='.$active.'><a href="users.php?page='.$i.'">'.$i.'</a></li>';
+
+      }
+
+      if($total_page>$page_number){
+        echo '<li><a href="users.php?page='.($page_number+1).'">prev</a></li>';
+      }
+    echo "</ul>";
+  }  
+
+
+
+?>
+                 
+                      <!-- <li class="active"><a>1</a></li> -->
+                      
+                  
+
+
               </div>
           </div>
       </div>
