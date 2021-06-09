@@ -114,7 +114,7 @@
       }
 
       if($total_page>$page_number){
-        echo '<li><a href="users.php?page='.($page_number+1).'">prev</a></li>';
+        echo '<li><a href="users.php?page='.($page_number+1).'">Next</a></li>';
       }
     echo "</ul>";
   }  
