@@ -1,3 +1,12 @@
+<?php
+session_start();
+if(isset($_SESSION['username'])){
+    header("location: post.php");
+} 
+?>
+
+
+
 <!doctype html>
 <html>
    <head>
@@ -35,11 +44,11 @@
     
             if(isset($_POST['login'])){
 
-                include "confiq.php";
+                include "config.php";
                 $username=mysqli_real_escape_string($connection,$_POST['username']);
-                $passowrd=md5($_POST['password']);
+                $password=md5($_POST['password']);
 
-                $query= "SELECT user_id,username,role FROM user WHERE username='{$username}' AND password='{$passowrd}'";
+                $query= "SELECT user_id,username,role FROM user WHERE username='{$username}' AND password='{$password}'";
                 $result=mysqli_query($connection,$query) or die ("Not Connected. ");
 
                 if(mysqli_num_rows($result)>0){
