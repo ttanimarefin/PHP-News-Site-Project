@@ -1,6 +1,6 @@
 <?php include "header.php"; 
 
-if(isset($_SESSION['user_role']=='0')){
+if($_SESSION['user_role']=='0'){
   header("location: post.php");
 }
 
@@ -19,7 +19,7 @@ if(isset($_SESSION['user_role']=='0')){
               <div class="col-md-12">
 
 
-        <?php 
+              <?php 
           include "config.php";
 
 
@@ -57,23 +57,23 @@ if(isset($_SESSION['user_role']=='0')){
         <?php  
             while($row=mysqli_fetch_assoc($result)){
 
-                $user_id=$row['user_id'];
-                $first_name_id=$row['first_name'];
-                $last_name_id=$row['last_name'];
-                $username_id=$row['username'];
-                $password_id=$row['password'];
-                $role_id=$row['role'];
+                $row['user_id'];
+                $row['first_name'];
+                $row['last_name'];
+                $row['username'];
+                $row['password'];
+                $row['role'];
 
             
         
         
         ?>
                           <tr>
-                              <td class='id'><?php echo $user_id?></td>
-                              <td><?php echo $first_name_id." ".$last_name_id?></td>
-                              <td><?php echo $username_id?></td>
+                              <td class='id'><?php echo $row['user_id'];?></td>
+                              <td><?php echo $row['first_name']." ".$row['last_name']?></td>
+                              <td><?php echo $row['username']?></td>
                               <td><?php 
-                                if($role_id==1){
+                                if($row['role']=1){
                                     echo "Admin";
                                 }else{
                                     echo "Modarator";
@@ -83,7 +83,7 @@ if(isset($_SESSION['user_role']=='0')){
                               ?>
                                </td>                          
                                <td class='edit'><a href='update-user.php?id=<?php echo $user_id?>'><i class='fa fa-edit'></i></a></td>
-                              <td class='delete'><a onclick="return confirm('Are You Sure?')" href='delete-user.php?id=<?php echo $user_id?>'><i class='fa fa-trash-o'></i></a></td>
+                              <td class='delete'><a onclick="return confirm('Are You Sure?')" href='delete-user.php?id=<?php echo $row['user_id']?>'><i class='fa fa-trash-o'></i></a></td>
                           </tr>
             <?php } ?>          
                           
