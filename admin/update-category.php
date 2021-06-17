@@ -12,22 +12,19 @@ if(isset($_POST['submit'])){
   $category_name=mysqli_real_escape_string($connection,$_POST['category_name']);
 
   
-  $query1= "UPDATE category SET 
-  category_name='{$category_name}',
-  
-  role='{$role}' WHERE user_id='{$user_id}' ";
+  $query1= "UPDATE category SET category_name='{$category_name}' WHERE category_id='{$category_id}' ";
 
   $result1=mysqli_query($connection,$query1) or die("Query Faild.");
   
 
   if($result1){
-      header("location: users.php");
+      header("location: category.php");
   }
 }
 
 ?>
 
-?>
+
   <div id="admin-content">
       <div class="container">
           <div class="row">
@@ -59,7 +56,7 @@ if(isset($_POST['submit'])){
                           <label>Category Name</label>
                           <input type="text" name="category_name" class="form-control" value="<?php echo $row['category_name']?>"  placeholder="" required>
                       </div>
-                      <input type="submit" name="sumbit" class="btn btn-primary" value="Update" required />
+                      <input type="submit" name="submit" class="btn btn-primary" value="Update" required />
                   </form>
 
           <?php 
