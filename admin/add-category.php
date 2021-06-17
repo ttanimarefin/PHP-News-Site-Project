@@ -14,14 +14,14 @@
                         $category_name=mysqli_real_escape_string($connection,$_POST['category_name']);
                         
                         
-                        $query= "SELECT category_name FROM category WHERE category_name='$category_name' ";
+                        $query= "SELECT category_name FROM category WHERE category_name='{$category_name}' ";
                         $result=mysqli_query($connection,$query) or die("Query Faild.");
                         
                         $count=mysqli_num_rows($result);
                         
                         if($count>0){
                             echo "category Already Exists";
-                        }{
+                        }else{
                             $query1= "INSERT INTO category (category_name) 
                             VALUE ('$category_name')";
                             $result1 = mysqli_query($connection,$query1) or die("Query1 Faild.");

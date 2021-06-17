@@ -1,5 +1,5 @@
 <?php include "header.php"; 
-if(isset($_SESSION['user_role']=='0')){
+if($_SESSION['user_role']=='0'){
     header("location: post.php");
   }
 
