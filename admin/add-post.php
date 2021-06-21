@@ -7,7 +7,7 @@
              </div>
               <div class="col-md-offset-3 col-md-6">
                   <!-- Form -->
-                  <form  action="" method="POST" enctype="multipart/form-data">
+                  <form  action="save-post.php" method="POST" enctype="multipart/form-data">
                       <div class="form-group">
                           <label for="post_title">Title</label>
                           <input type="text" name="post_title" class="form-control" autocomplete="off" required>
@@ -21,7 +21,18 @@
                           <select name="category" class="form-control">
                               <option disable value="" selected> Select Category</option>
                               <?php 
-                               include'config.php';
+                               include"config.php";
+                                $query="SELECT * FROM category";
+                                $result= mysqli_query($connection,$query) or die("query failed");
+
+                                if(mysqli_num_rows($result)>0){
+                                    while($row=mysqli_fetch_assoc($result)){
+                                        echo "<option  value='{$row['category_id']}'> {$row['category_name']}</option>";
+
+                                    }
+
+                                }
+
                               ?>
                           </select>
                       </div>
