@@ -50,7 +50,7 @@ if(isset($_POST['submit'])){
 
                   <form action="<?php $_SERVER['PHP_SELF']?>" method ="POST">
                       <div class="form-group">
-                          <input type="hidden" name="category_id"  class="form-control" value="<?php echo $row['category_id']?>" placeholder="">
+                          <input type="hidden" name="category_id"  class="form-control" value=c" placeholder="">
                       </div>
                       <div class="form-group">
                           <label>Category Name</label>

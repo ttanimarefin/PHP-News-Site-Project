@@ -2,29 +2,35 @@
 include "config.php";
 if(isset($_FILES['fileToUpload'])){
 
- $errors=array();
+ $errors = array();
 
 
- $file_name=$_FILES['fileToUpload']['name'];
- $file_size=$_FILES['fileToUpload']['size'];
- $file_tmp=$_FILES['fileToUpload']['tmp_name'];
- $file_type=$_FILES['fileToUpload']['type'];
- $file_ext=end(explode('.',$file_name));
+ $file_name = $_FILES['fileToUpload']['name'];
+ $file_size = $_FILES['fileToUpload']['size'];
+ $file_tmp = $_FILES['fileToUpload']['tmp_name'];
+ $file_type = $_FILES['fileToUpload']['type'];
+ $exploded = explode('.', $file_name);
+ $file_ext = end($exploded);
 
- $extensions= array("jpeg","jpg","png");
 
-if(in_array($file_ext,$extensions)==false)
+//  $file_ext = end(explode('.',$file_name));
+
+
+
+ $extensions= array("jpge" ,"jpg","png");
+
+if(in_array($file_ext,$extensions) === false)
 {
 
     $errors[]="This extension file not allowed,please choose a JPG or PNG file.";
 
 }
 if($file_size > 2097152){
-    $errors[]="File size must be 2 MB or Less";
+    $errors[]= "File size must be 2 MB or Less ";
 }
 
-$new_name= time()."-".basename($file_name);
-$target="upload/".$new_name;
+$new_name= time(). "-".basename($file_name);
+$target= "upload/".$new_name;
 
 
 if(empty($errors)==true){
@@ -37,19 +43,22 @@ if(empty($errors)==true){
 }
 
 
-
 session_start();
 
-$title=mysqli_real_escape_string($connection,$_POST['post_title']);
-$description=mysqli_real_escape_string($connection,$_POST['postdesc']);
-$category=mysqli_real_escape_string($connection,$_POST['category']);
-$date=date("d M, Y");
+
+
+$title=mysqli_real_escape_string($connection, $_POST['post_title']);
+echo var_dump($title);
+$description=mysqli_real_escape_string($connection, $_POST['postdesc']);
+$category=mysqli_real_escape_string($connection, $_POST['category']);
+$date=date("Y-m-d h:i:s"); 
 $author=$_SESSION['user_id'];
 
 
-$sql="INSERT INTO post(title, description, category, post_date, author, post_img) VALUES('{$title}','{$description}','{$category}','{$post_date}','{$author}','{$new_name}');";
-$sql.= "UPDATE category SET post= post + 1 WHERE category_id={$category}";
 
+$sql= "INSERT INTO post(title,description,category,post_date,author,post_img) VALUES('{$title}','{$description}',{$category},'{$date}','{$author}','{$new_name}');";
+$sql .= "UPDATE category SET post= post + 1 WHERE category_id={$category}";
+echo var_dump($sql);
 if(mysqli_multi_query($connection,$sql)){
     header("loaction: post.php");
 }else{

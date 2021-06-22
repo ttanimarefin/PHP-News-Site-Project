@@ -1,4 +1,4 @@
-<?php include "header.php"; ?>
+<?php include "header.php";?>
   <div id="admin-content">
       <div class="container">
          <div class="row">
@@ -6,6 +6,7 @@
                  <h1 class="admin-heading">Add New Post</h1>
              </div>
               <div class="col-md-offset-3 col-md-6">
+              
                   <!-- Form -->
                   <form  action="save-post.php" method="POST" enctype="multipart/form-data">
                       <div class="form-group">
@@ -21,7 +22,7 @@
                           <select name="category" class="form-control">
                               <option disable value="" selected> Select Category</option>
                               <?php 
-                               include"config.php";
+                                 include "config.php";
                                 $query="SELECT * FROM category";
                                 $result= mysqli_query($connection,$query) or die("query failed");
 
@@ -42,6 +43,8 @@
                       </div>
                       <input type="submit" name="submit" class="btn btn-primary" value="Save" required />
                   </form>
+
+                  
                   <!--/Form -->
               </div>
           </div>
