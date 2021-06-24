@@ -48,19 +48,22 @@ session_start();
 
 
 $title=mysqli_real_escape_string($connection, $_POST['post_title']);
-echo var_dump($title);
 $description=mysqli_real_escape_string($connection, $_POST['postdesc']);
 $category=mysqli_real_escape_string($connection, $_POST['category']);
 $date=date("Y-m-d h:i:s"); 
+// Problem was here check your code
 $author=$_SESSION['user_id'];
 
 
 
 $sql= "INSERT INTO post(title,description,category,post_date,author,post_img) VALUES('{$title}','{$description}',{$category},'{$date}','{$author}','{$new_name}');";
+// Problem was here. 
+// Write '{$author}','{$new_name}'
+
 $sql .= "UPDATE category SET post= post + 1 WHERE category_id={$category}";
-echo var_dump($sql);
+
 if(mysqli_multi_query($connection,$sql)){
-    header("loaction: post.php");
+    header("location: post.php");
 }else{
     echo "<div class='alert alert-danger'>Query Failed.</div>";
 }

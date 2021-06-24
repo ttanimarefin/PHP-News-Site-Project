@@ -15,7 +15,7 @@
                       </div>
                       <div class="form-group">
                           <label for="exampleInputPassword1"> Description</label>
-                          <textarea name="postdesc" class="form-control" rows="5"  required></textarea>
+                          <textarea name="postdesc" class="form-control" rows="20"  required></textarea>
                       </div>
                       <div class="form-group">
                           <label for="exampleInputPassword1">Category</label>
