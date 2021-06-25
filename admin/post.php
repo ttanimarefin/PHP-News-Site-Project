@@ -13,9 +13,12 @@
 
 
 <?php 
+    if($_SESSION['user_role']=='0'){
+      header("location: post.php");
+    }
     include "config.php";
-
-
+    
+    
     #pagination
     $limit=3;
     if(isset($_GET['page'])){
@@ -25,25 +28,29 @@
     }
     
     $offset=($page_number-1) * $limit;
-
+   
     if($_SESSION['user_role']=='1'){
-        $query="SELECT post.post_id, post.title, post.description,post.post_date,category.category_name,user.username FROM post 
+    
+    $query="SELECT post.post_id, post.title, post.description, post.post_date, category.category_name,user.username FROM post 
     LEFT JOIN category ON post.category = category.category_id 
     LEFT JOIN user ON post.author = user.user_id
     ORDER BY post.post_id DESC LIMIT {$offset},{$limit}";
-
-      }elseif($_SESSION['user_role']=='0'){
-        $query="SELECT post.post_id, post.title, post.description,post.post_date,category.category_name,user.username FROM post 
+   
+    }elseif ($_SESSION['user_role']=='0')
+       {
+        $query ="SELECT post.post_id, post.title, post.description, post.post_date, category.category_name, user.username FROM post 
         LEFT JOIN category ON post.category = category.category_id 
         LEFT JOIN user ON post.author = user.user_id
         WHERE post.author = {$_SESSION['user_id']}
-        ORDER BY post.post_id DESC LIMIT {$offset},{$limit}";
-      }
+        ORDER BY post.post_id DESC LIMIT {$offset},{$limit} ";
+          
+       }
+      
      #data show and pagination
-    $result=mysqli_query($connection,$query) or die("Query Failed.");
-    
+     $result= mysqli_query($connection,$query) or die(mysqli_error($result));
+    //  $posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
+   
     $count=mysqli_num_rows($result);
-    
     if($count>0){
 
 ?>
