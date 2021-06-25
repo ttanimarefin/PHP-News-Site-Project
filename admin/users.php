@@ -54,7 +54,8 @@ if($_SESSION['user_role']=='0'){
                       </thead>
                       <tbody>
 
-        <?php  
+        <?php
+        
             while($row=mysqli_fetch_assoc($result)){
 
                 $row['user_id'];
@@ -73,7 +74,7 @@ if($_SESSION['user_role']=='0'){
                               <td><?php echo $row['first_name']." ".$row['last_name']?></td>
                               <td><?php echo $row['username']?></td>
                               <td><?php 
-                                if($row['role']=1){
+                                if($row['role']=='1'){
                                     echo "Admin";
                                 }else{
                                     echo "Modarator";
