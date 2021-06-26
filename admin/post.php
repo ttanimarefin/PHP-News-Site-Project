@@ -13,9 +13,7 @@
 
 
 <?php 
-    if($_SESSION['user_role']=='0'){
-      header("location: post.php");
-    }
+    
     include "config.php";
     
     
