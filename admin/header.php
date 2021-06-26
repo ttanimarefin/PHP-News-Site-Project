@@ -55,7 +55,7 @@ if(!isset($_SESSION['username'])){
 
             <?php
             
-              if($_SESSION['user_role']=-'1'){
+              if($_SESSION['user_role']=='1'){
             ?>
                             <li>
                                 <a href="category.php">Category</a>
