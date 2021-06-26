@@ -31,14 +31,14 @@
 
     if($_SESSION['user_role']=='1'){
     
-    $query="SELECT post.post_id, post.title, post.description, post.post_date, category.category_name,user.username FROM post 
+    $query="SELECT post.post_id,post.post_img, post.title,post.category, post.description, post.post_date, category.category_name,user.username FROM post 
     LEFT JOIN category ON post.category = category.category_id 
     LEFT JOIN user ON post.author = user.user_id
     ORDER BY post.post_id DESC LIMIT {$offset},{$limit}";
    
     }elseif ($_SESSION['user_role']=='0')
        {
-        $query ="SELECT post.post_id, post.title, post.description, post.post_date, category.category_name, user.username FROM post 
+        $query ="SELECT post.post_id,post.post_img, post.title,post.category, post.description, post.post_date, category.category_name, user.username FROM post 
         LEFT JOIN category ON post.category = category.category_id 
         LEFT JOIN user ON post.author = user.user_id
         WHERE post.author = {$_SESSION['user_id']}
@@ -58,6 +58,7 @@
                   <table class="content-table">
                       <thead>
                           <th>S.No.</th>
+                          <th>Image</th>
                           <th>Title</th>
                           <th>Category</th>
                           <th>Date</th>
@@ -72,12 +73,13 @@
     ?>        
                           <tr>
                               <td class='id'><?php echo $serial_number++?></td>
+                              <td><img height="50" src="upload/<?php echo $row['post_img']?>"></td>
                               <td><?php echo $row['title']?></td>
                               <td><?php echo $row['category_name']?></td>
                               <td><?php echo $row['post_date']?></td>
                               <td><?php echo $row['username']?></td>
                               <td class='edit'><a href='update-post.php?id=<?php echo $row['post_id']?>'><i class='fa fa-edit'></i></a></td>
-                              <td class='delete'><a href='delete-post.php?id=<?php echo $row['post_id']?>'><i class='fa fa-trash-o'></i></a></td>
+                              <td class='delete'><a href='delete-post.php?id=<?php echo $row['post_id']?>&catid=<?php echo $row['category']?>'><i class='fa fa-trash-o'></i></a></td>
                           </tr>
  <?php } ?>             
                       </tbody>
