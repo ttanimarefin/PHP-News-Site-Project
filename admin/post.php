@@ -78,7 +78,7 @@
                               <td><?php echo $row['category_name']?></td>
                               <td><?php echo $row['post_date']?></td>
                               <td><?php echo $row['username']?></td>
-                              <td class='edit'><a href='update-post.php?id=<?php echo $row['post_id']?>'><i class='fa fa-edit'></i></a></td>
+                              <td class='edit'><a onclick="return confirm('Are You Sure?')" href='update-post.php?id=<?php echo $row['post_id']?>'><i class='fa fa-edit'></i></a></td>
                               <td class='delete'><a href='delete-post.php?id=<?php echo $row['post_id']?>&catid=<?php echo $row['category']?>'><i class='fa fa-trash-o'></i></a></td>
                           </tr>
  <?php } ?>             
