@@ -28,7 +28,9 @@
     }
     
     $offset=($page_number-1) * $limit;
-   
+
+    var_dump($_SESSION['user_role']);
+
     if($_SESSION['user_role']=='1'){
     
     $query="SELECT post.post_id, post.title, post.description, post.post_date, category.category_name,user.username FROM post 
@@ -47,7 +49,7 @@
        }
       
      #data show and pagination
-     $result= mysqli_query($connection,$query) or die(mysqli_error($result));
+     $result= mysqli_query($connection,$query) or die("die");
     //  $posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
    
     $count=mysqli_num_rows($result);
