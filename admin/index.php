@@ -59,7 +59,7 @@ if(isset($_SESSION['username'])){
                         session_start();
                         $_SESSION['username']=$row['username'];
                         $_SESSION['user_id']=$row['user_id'];
-                        $_SESSION['user_role']=$row['user_role'];
+                        $_SESSION['user_role']=$row['role'];
 
                         header("location: post.php");
 
