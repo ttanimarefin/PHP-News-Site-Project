@@ -13,17 +13,17 @@
     <div class="col-md-offset-3 col-md-6">
         <!-- Form for show edit-->
 
-<?
+<?php
  include "config.php";
  $post_id=$_GET['id'];
 
- $query="SELECT post.post_id, post.title, post.description,post.post_img,post.category,  category.category_name  FROM post 
+ $query="SELECT post.post_id, post.title, post.description,post.post_img,post.category,category.category_name  FROM post 
     LEFT JOIN category ON post.category = category.category_id 
     LEFT JOIN user ON post.author = user.user_id
     WHERE post.post_id = {$post_id}";
 
 
-$result= mysqli_query($connection,$query) or die(mysqli_error($result));
+$result= mysqli_query($connection,$query) or die("query failed");
     //  $posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
    
     $count=mysqli_num_rows($result);
@@ -41,9 +41,7 @@ $result= mysqli_query($connection,$query) or die(mysqli_error($result));
             </div>
             <div class="form-group">
                 <label for="exampleInputPassword1"> Description</label>
-                <textarea name="postdesc" class="form-control"  required rows="5">
-                <?php echo $row['description'];?>
-                </textarea>
+                <textarea name="postdesc" class="form-control"  required rows="15"><?php echo $row['description'];?></textarea>
             </div>
             <div class="form-group">
                 <label for="exampleInputCategory">Category</label>
@@ -54,7 +52,7 @@ $result= mysqli_query($connection,$query) or die(mysqli_error($result));
                                 $query1="SELECT * FROM category";
                                 $result1= mysqli_query($connection,$query1) or die("query failed");
 
-                                if(mysqli_num_rows($result)>0){
+                                if(mysqli_num_rows($result1)>0){
                                     while($row1=mysqli_fetch_assoc($result1)){
                                         if($row['category']==$row1['category_id']){
                                             $selected="selected";
@@ -69,7 +67,9 @@ $result= mysqli_query($connection,$query) or die(mysqli_error($result));
 
                               ?>
                 </select>
+                <input type="hidden" name="old_category" value="<?php echo $row['category'];?>">
             </div>
+
             <div class="form-group">
                 <label for="">Post image</label>
                 <input type="file" name="new-image">
@@ -80,7 +80,7 @@ $result= mysqli_query($connection,$query) or die(mysqli_error($result));
         </form>
 
 <?php
-        }  
+        } 
 
         }
         else{
