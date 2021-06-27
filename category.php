@@ -78,7 +78,7 @@ if(isset($_GET['cid'])){
                                             </span>
                                             <span>
                                                 <i class="fa fa-user" aria-hidden="true"></i>
-                                                <a href='author.php'><?php echo $row['username']?></a>
+                                                <a href='author.php?author_id=<?php echo $row['author']?>'><?php echo $row['username']?></a>
                                             </span>
                                             <span>
                                                 <i class="fa fa-calendar" aria-hidden="true"></i>
@@ -112,7 +112,7 @@ if(isset($_GET['cid'])){
       echo "<ul class='pagination admin-pagination'>";
 
       if($page_number>1){
-        echo '<li><a href="category.php?page='.($page_number-1).'">prev</a></li>';
+        echo '<li><a href="category.php?cid ='.$rcv_cid.'&page='.($page_number-1).'">prev</a></li>';
       }
       
       for($i=1; $i<=$total_page; $i++){
@@ -128,7 +128,7 @@ if(isset($_GET['cid'])){
       }
 
       if($total_page>$page_number){
-        echo '<li><a href="category.php?page='.($page_number+1).'">Next</a></li>';
+        echo '<li><a href="category.php?cid ='.$rcv_cid.'&page='.($page_number+1).'">Next</a></li>';
       }
     echo "</ul>";
   }  
