@@ -76,7 +76,7 @@ if(isset($_GET['author_id'])){
                                             </span>
                                             <span>
                                                 <i class="fa fa-user" aria-hidden="true"></i>
-                                                <a href='author.phpauthor_id=<?php echo $row['author']?>'><?php echo $row['username']?></a>
+                                                <a href='author.php?author_id=<?php echo $row['author']?>'><?php echo $row['username']?></a>
                                             </span>
                                             <span>
                                                 <i class="fa fa-calendar" aria-hidden="true"></i>
